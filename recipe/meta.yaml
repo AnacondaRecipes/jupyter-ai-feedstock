@@ -16,14 +16,14 @@ build:
 
 requirements:
   host:
-    - python ${{ python_min }}.*
+    - python
     - hatchling >=1.4.0
     - jupyterlab >=4.0,<5
     - hatch-nodejs-version
     - pip
     - hatch-jupyter-builder
   run:
-    - python >=${{ python_min }}
+    - python
     - jupyter-ai-acp-client >=0.1.0
     - jupyter-ai-chat-commands >=0.0.4
     - jupyter-ai-persona-manager >=0.0.8
