@@ -2,8 +2,8 @@
 {% set version = "3.0.0" %}
 
 package:
-  name: jupyter-ai
-  version: ${{ version }}
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/j/jupyter-ai/jupyter_ai-${{ version }}.tar.gz
