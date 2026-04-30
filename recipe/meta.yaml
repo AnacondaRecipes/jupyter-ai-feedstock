@@ -34,6 +34,14 @@ requirements:
     - jupyterlab-chat >=0.21.0
     - jupyterlab-commands-toolkit >=0.1.4
     - jupyterlab-notebook-awareness >=0.2.0
+  run_constrained:
+    # magics
+    - jupyter_ai_litellm>=0.0.2
+    - jupyter_ai_magic_commands>=0.0.3
+    # jupyternaut
+    - jupyter_ai_litellm>=0.0.2
+    - jupyter_ai_jupyternaut>=0.0.11
+
 
 tests:
   - python:
