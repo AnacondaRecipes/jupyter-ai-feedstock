@@ -44,6 +44,8 @@ requirements:
     - jupyter_ai_jupyternaut >=0.0.11
 
 test:
+  files:
+    - test_extensions.py
   imports:
     - jupyter_ai
   requires:
@@ -54,6 +56,12 @@ test:
     # check entry point
     - python -c "from jupyter_ai import DEFAULT_JUPYTER_SERVER_MCP_TOOLS; assert DEFAULT_JUPYTER_SERVER_MCP_TOOLS is not None"
     - python -c "from importlib.metadata import entry_points; eps = entry_points(group='jupyter_server_mcp.tools'); assert any(ep.name == 'jupyter_ai' for ep in eps)"
+    # log extensions
+    - jupyter server extension list
+    # log frontend extensions
+    - jupyter labextension list
+    # check that extensions exist and are recognized
+    - python test_extensions.py
 
 about:
   home: https://github.com/jupyterlab/jupyter-ai
