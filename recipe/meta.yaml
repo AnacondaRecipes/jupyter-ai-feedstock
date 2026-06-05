@@ -43,12 +43,13 @@ requirements:
     - jupyter_ai_jupyternaut>=0.0.11
 
 
-tests:
-  - python:
-      imports:
-        - jupyter_ai
-      pip_check: true
-      python_version: ${{ python_min }}.*
+test:
+  imports:
+    - jupyter_ai
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   homepage: https://github.com/jupyterlab/jupyter-ai
