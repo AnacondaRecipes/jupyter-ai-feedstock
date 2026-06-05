@@ -46,13 +46,14 @@ requirements:
 test:
   imports:
     - jupyter_ai
-    - jupyter_ai.config_manager
-    - jupyter_ai.handlers
   requires:
     - pip
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # check entry point
+    - python -c "from jupyter_ai import DEFAULT_JUPYTER_SERVER_MCP_TOOLS; assert DEFAULT_JUPYTER_SERVER_MCP_TOOLS is not None"
+    - python -c "from importlib.metadata import entry_points; eps = entry_points(group='jupyter_server_mcp.tools'); assert any(ep.name == 'jupyter_ai' for ep in eps)"
 
 about:
   homepage: https://github.com/jupyterlab/jupyter-ai
