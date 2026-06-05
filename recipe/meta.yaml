@@ -17,13 +17,14 @@ build:
 requirements:
   host:
     - python
-    - hatchling >=1.4.0
-    - jupyterlab >=4.0,<5
-    - hatch-nodejs-version
     - pip
+    - hatchling >=1.4.0
+    - hatch-nodejs-version
     - hatch-jupyter-builder
   run:
+    # Note the package has been converted to a metapackage as of version 3.0.0
     - python
+    - jupyterlab >=4.0,<5
     - jupyter-ai-acp-client >=0.1.0
     - jupyter-ai-chat-commands >=0.0.4
     - jupyter-ai-persona-manager >=0.0.8
@@ -41,7 +42,6 @@ requirements:
     # jupyternaut
     #- jupyter_ai_litellm (duplicate)
     - jupyter_ai_jupyternaut >=0.0.11
-
 
 test:
   imports:
