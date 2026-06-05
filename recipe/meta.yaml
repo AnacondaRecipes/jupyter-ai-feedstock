@@ -50,6 +50,7 @@ test:
     - pip
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
 about:
   homepage: https://github.com/jupyterlab/jupyter-ai
