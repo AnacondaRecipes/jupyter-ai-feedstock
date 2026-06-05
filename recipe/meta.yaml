@@ -39,7 +39,7 @@ requirements:
     - jupyter_ai_litellm >=0.0.2
     - jupyter_ai_magic_commands >=0.0.3
     # jupyternaut
-    - jupyter_ai_litellm >=0.0.2
+    #- jupyter_ai_litellm (duplicate)
     - jupyter_ai_jupyternaut >=0.0.11
 
 
