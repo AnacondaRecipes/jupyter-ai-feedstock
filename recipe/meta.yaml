@@ -56,12 +56,14 @@ test:
     - python -c "from importlib.metadata import entry_points; eps = entry_points(group='jupyter_server_mcp.tools'); assert any(ep.name == 'jupyter_ai' for ep in eps)"
 
 about:
-  homepage: https://github.com/jupyterlab/jupyter-ai
-  repository: https://github.com/jupyterlab/jupyter-ai
-  documentation: https://jupyter-ai.readthedocs.io/en/v3/
+  home: https://github.com/jupyterlab/jupyter-ai
+  summary: A set of extensions providing agentic AI in JupyterLab
+  description: An open source extension that connects AI agents to computational notebooks in JupyterLab.
   license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE
-  summary: "A set of extensions providing agentic AI in JupyterLab"
+  dev_url: https://github.com/jupyterlab/jupyter-ai
+  doc_url: https://jupyter-ai.readthedocs.io
 
 extra:
   recipe-maintainers:
