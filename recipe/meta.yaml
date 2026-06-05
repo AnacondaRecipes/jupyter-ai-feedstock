@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   skip: true  # [py<39]
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -46,6 +46,8 @@ requirements:
 test:
   imports:
     - jupyter_ai
+    - jupyter_ai.config_manager
+    - jupyter_ai.handlers
   requires:
     - pip
   commands:
