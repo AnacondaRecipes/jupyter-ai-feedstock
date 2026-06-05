@@ -5,8 +5,8 @@ def get_output(command):
         [sys.executable, '-m'] + command,
         stderr=subprocess.STDOUT
     ).decode()
-    # strip ANSI color codes
-    return re.sub(r'\x1b\[[0-9;]*m', '', out)
+    # strip ANSI color codes and lowercase it ('OK' vs. 'ok' returned based on the platform)
+    return re.sub(r'\x1b\[[0-9;]*m', '', out).lower()
 
 # check server extensions
 server_out = get_output(['jupyter', 'server', 'extension', 'list'])
@@ -23,7 +23,7 @@ server_extensions = [
     'jupyterlab_commands_toolkit',
 ]
 for ext in server_extensions:
-    assert ext in server_out and 'OK' in server_out, f'{ext} not found or not OK'
+    assert ext in server_out and 'ok' in server_out, f'{ext} not found or not OK'
     print(f'OK: {ext}')
 
 # check frontend extensions
@@ -32,5 +32,5 @@ lab_extensions = [
     'jupyterlab-notebook-awareness',
 ]
 for ext in lab_extensions:
-    assert ext in lab_out and 'enabled OK' in lab_out, f'{ext} not found or not enabled'
+    assert ext in lab_out and 'enabled ok' in lab_out, f'{ext} not found or not enabled'
     print(f'OK: {ext}')
