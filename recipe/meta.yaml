@@ -1,0 +1,81 @@
+{% set name = "jupyter-ai" %}
+{% set version = "3.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-','_') }}-{{ version }}.tar.gz
+  sha256: f7e56c5884328812500d1e4bb4c47146f0a920f913b8033fce15ac56d62ec87b
+
+build:
+  number: 0
+  skip: true  # [py<39]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+
+requirements:
+  host:
+    - python
+    - pip
+    - hatchling >=1.4.0
+    - hatch-nodejs-version
+    - hatch-jupyter-builder
+  run:
+    # Note the package has been converted to a metapackage as of version 3.0.0
+    - python
+    - jupyterlab >=4.0,<5
+    - jupyter-ai-acp-client >=0.1.0
+    - jupyter-ai-chat-commands >=0.0.4
+    - jupyter-ai-persona-manager >=0.0.8
+    - jupyter-ai-router >=0.0.3
+    - jupyter-ai-tools >=0.4.1
+    - jupyter_server_documents >=0.1.2
+    - jupyter-server-mcp >=0.1.2
+    - jupyterlab-chat >=0.21.0
+    - jupyterlab-commands-toolkit >=0.1.4
+    - jupyterlab-notebook-awareness >=0.2.0
+  run_constrained:
+    # magics
+    - jupyter_ai_litellm >=0.0.2
+    - jupyter_ai_magic_commands >=0.0.3
+    # jupyternaut
+    #- jupyter_ai_litellm (duplicate)
+    - jupyter_ai_jupyternaut >=0.0.11
+
+test:
+  files:
+    - test_extensions.py
+  imports:
+    - jupyter_ai
+  requires:
+    - pip
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # check entry point
+    - python -c "from jupyter_ai import DEFAULT_JUPYTER_SERVER_MCP_TOOLS; assert DEFAULT_JUPYTER_SERVER_MCP_TOOLS is not None"
+    - python -c "from importlib.metadata import entry_points; eps = entry_points(group='jupyter_server_mcp.tools'); assert any(ep.name == 'jupyter_ai' for ep in eps)"
+    # log extensions
+    - jupyter server extension list
+    # log frontend extensions
+    - jupyter labextension list
+    # check that extensions exist and are recognized
+    - python test_extensions.py
+
+about:
+  home: https://github.com/jupyterlab/jupyter-ai
+  summary: A set of extensions providing agentic AI in JupyterLab
+  description: An open source extension that connects AI agents to computational notebooks in JupyterLab.
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  dev_url: https://github.com/jupyterlab/jupyter-ai
+  doc_url: https://jupyter-ai.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - dlqqq
+    - 3coins
+    - andrii-i
+    - srdas
